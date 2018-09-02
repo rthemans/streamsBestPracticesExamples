@@ -2,7 +2,6 @@ package com.capgemini.streams.domain;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Chapter {
     private Title title;
@@ -70,11 +69,12 @@ public class Chapter {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("title", title)
-                .append("startingPage", startingPage)
-                .append("numberOfPages", numberOfPages)
-                .append("content", content)
-                .toString();
+        final StringBuilder sb = new StringBuilder("Chapter{");
+        sb.append("title=").append(title);
+        sb.append(", startingPage=").append(startingPage);
+        sb.append(", numberOfPages=").append(numberOfPages);
+        sb.append(", content=").append(content);
+        sb.append('}');
+        return sb.toString();
     }
 }

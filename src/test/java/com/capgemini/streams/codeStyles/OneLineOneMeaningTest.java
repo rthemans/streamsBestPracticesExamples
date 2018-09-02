@@ -1,25 +1,28 @@
 package com.capgemini.streams.codeStyles;
 
-import org.junit.Before;
-import org.junit.Test;
+import com.capgemini.streams.common.logging.AbstractTest;
+import com.capgemini.streams.service.impl.LibraryServiceIntegrationTestImpl;
 
-import static org.junit.Assert.*;
+import java.util.List;
 
-public class OneLineOneMeaningTest {
-    private OneLineOneMeaning target;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.not;
+import static org.junit.Assert.assertThat;
 
-    @Before
-    public void setup() {
-        target = new OneLineOneMeaning();
+public class OneLineOneMeaningTest extends AbstractTest<OneLineOneMeaning> {
+
+    @Override
+    public OneLineOneMeaning setTarget() {
+        return new OneLineOneMeaning(new LibraryServiceIntegrationTestImpl(), loggerMock);
     }
 
-    @Test
-    public void good() {
-        target.good();
+    @Override
+    public void verifyGood(List<String> logs) {
+        assertThat(logs, not(empty()));
     }
 
-    @Test
-    public void bad() {
-        target.bad();
+    @Override
+    protected void verifyBad(List<String> logs) {
+        assertThat(logs, not(empty()));
     }
 }

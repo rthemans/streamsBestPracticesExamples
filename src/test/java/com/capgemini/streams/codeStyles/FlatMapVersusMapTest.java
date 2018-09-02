@@ -2,7 +2,6 @@ package com.capgemini.streams.codeStyles;
 
 import com.capgemini.streams.common.logging.AbstractTest;
 import com.capgemini.streams.service.impl.LibraryServiceIntegrationTestImpl;
-import org.junit.Test;
 
 import java.util.List;
 
@@ -10,11 +9,12 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
 
-public class BracesAreEvilsTest extends AbstractTest<BracesAreEvils> {
+
+public class FlatMapVersusMapTest extends AbstractTest<FlatMapVersusMap> {
 
     @Override
-    public BracesAreEvils setTarget() {
-        return new BracesAreEvils(new LibraryServiceIntegrationTestImpl(), loggerMock);
+    public FlatMapVersusMap setTarget() {
+        return new FlatMapVersusMap(new LibraryServiceIntegrationTestImpl(), loggerMock);
     }
 
     @Override
@@ -25,10 +25,5 @@ public class BracesAreEvilsTest extends AbstractTest<BracesAreEvils> {
     @Override
     protected void verifyBad(List<String> logs) {
         assertThat(logs, not(empty()));
-    }
-
-    @Test
-    public void old() {
-        target.old();
     }
 }

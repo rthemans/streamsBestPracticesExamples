@@ -94,11 +94,12 @@ public class Book {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("parutionDate", parutionDate)
-                .append("author", author)
-                .append("title", title)
-                .append("chapters", chapters)
-                .toString();
+        final StringBuilder sb = new StringBuilder("Book{");
+        sb.append("parutionDate=").append(parutionDate);
+        sb.append(", author=").append(author);
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", chapters=").append(chapters);
+        sb.append('}');
+        return sb.toString();
     }
 }

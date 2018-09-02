@@ -2,7 +2,6 @@ package com.capgemini.streams.domain;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.awt.*;
 
@@ -45,6 +44,17 @@ public class Content {
     }
 
     @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Content{");
+        sb.append("text='").append(text).append('\'');
+        sb.append(", fontSize=").append(fontSize);
+        sb.append(", fontPolicy=").append(fontPolicy);
+        sb.append(", numberOfParagraphs=").append(numberOfParagraphs);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
 
@@ -70,13 +80,4 @@ public class Content {
                 .toHashCode();
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("text", text)
-                .append("fontSize", fontSize)
-                .append("fontPolicy", fontPolicy)
-                .append("numberOfParagraphs", numberOfParagraphs)
-                .toString();
-    }
 }

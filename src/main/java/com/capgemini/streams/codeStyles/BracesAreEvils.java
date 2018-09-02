@@ -1,13 +1,14 @@
 package com.capgemini.streams.codeStyles;
 
-import com.capgemini.streams.BestPracticeExample;
+import com.capgemini.streams.common.BestPracticeExample;
 import com.capgemini.streams.domain.Book;
+import com.capgemini.streams.service.LibraryService;
+import com.google.inject.Inject;
 
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static com.capgemini.streams.common.Initialize.initializeBooks;
 import static com.capgemini.streams.common.StringUtils.NL;
 
 /**
@@ -15,19 +16,25 @@ import static com.capgemini.streams.common.StringUtils.NL;
  */
 public class BracesAreEvils implements BestPracticeExample {
 
-    public static final Logger LOGGER = Logger.getLogger(BracesAreEvils.class.getName());
+    private final Logger logger;
 
+    private LibraryService libraryService;
 
+    @Inject
+    public BracesAreEvils(LibraryService libraryService, Logger logger) {
+        this.libraryService = libraryService;
+        this.logger = logger;
+    }
 
     @Override
     public void good() {
-        List<Book> books = initializeBooks();
+        List<Book> books = libraryService.getAllBooks();
 
-        if (LOGGER.isLoggable(Level.INFO)) {
+        if (logger.isLoggable(Level.INFO)) {
             books.stream()
                     .filter(book -> book.getParutionDate().getYear() > 1991)
                     .map(this::describeBook)
-                    .forEach(LOGGER::info);
+                    .forEach(logger::info);
         }
     }
 
@@ -47,7 +54,7 @@ public class BracesAreEvils implements BestPracticeExample {
 
     @Override
     public void bad() {
-        List<Book> books = initializeBooks();
+        List<Book> books = libraryService.getAllBooks();
 
         StringBuilder text = new StringBuilder();
         books.stream()
@@ -64,15 +71,15 @@ public class BracesAreEvils implements BestPracticeExample {
                                 .append("It contained the following chapters : ")
                                 .append(book.getChapters())
                                 .append(".");
-                        LOGGER.info(() -> text.toString());
+                        logger.info(() -> text.toString());
                     }
                 });
     }
 
     public void old() {
-        List<Book> books = initializeBooks();
+        List<Book> books = libraryService.getAllBooks();
 
-        if (LOGGER.isLoggable(Level.INFO)) {
+        if (logger.isLoggable(Level.INFO)) {
             for (Book book : books) {
                 if (book.getParutionDate().getYear() > 1991) {
                     StringBuilder text = new StringBuilder()
@@ -85,7 +92,7 @@ public class BracesAreEvils implements BestPracticeExample {
                             .append("It contained the following chapters : ")
                             .append(book.getChapters())
                             .append(".");
-                    LOGGER.info(text::toString);
+                    logger.info(text::toString);
                 }
             }
         }

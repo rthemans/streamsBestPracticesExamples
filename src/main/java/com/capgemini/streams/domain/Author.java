@@ -27,7 +27,7 @@ import java.util.Optional;
 public class Author {
     private String name;
     private LocalDate birthDate;
-    private Optional<LocalDate> deathDate = Optional.empty();
+    private LocalDate deathDate;
     private String country;
     private Locale language;
 
@@ -48,15 +48,15 @@ public class Author {
     }
 
     public boolean isDead() {
-        return deathDate.isPresent();
+        return deathDate == null;
     }
 
-    public Optional<LocalDate> getDeathDate() {
+    public LocalDate getDeathDate() {
         return deathDate;
     }
 
     public void setDeathDate(LocalDate deathDate) {
-        this.deathDate = Optional.of(deathDate);
+        this.deathDate = deathDate;
     }
 
     public String getCountry() {
@@ -105,12 +105,13 @@ public class Author {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("name", name)
-                .append("birthDate", birthDate)
-                .append("deathDate", deathDate)
-                .append("country", country)
-                .append("language", language)
-                .toString();
+        final StringBuilder sb = new StringBuilder("Author{");
+        sb.append("name='").append(name).append('\'');
+        sb.append(", birthDate=").append(birthDate);
+        sb.append(", deathDate=").append(deathDate);
+        sb.append(", country='").append(country).append('\'');
+        sb.append(", language=").append(language);
+        sb.append('}');
+        return sb.toString();
     }
 }

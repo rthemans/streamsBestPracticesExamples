@@ -13,9 +13,10 @@
 ////////////////////////////////////////////////////////////////////
 package com.capgemini.streams.codeStyles;
 
-import com.capgemini.streams.BestPracticeExample;
-import com.capgemini.streams.common.Initialize;
+import com.capgemini.streams.common.BestPracticeExample;
 import com.capgemini.streams.domain.Book;
+import com.capgemini.streams.service.LibraryService;
+import com.google.inject.Inject;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,12 +30,19 @@ import static java.util.stream.Collectors.toMap;
  * @author FJM575 (Raphael Themans)
  */
 public class OneLineOneMeaning implements BestPracticeExample {
-    private static final Logger LOGGER = Logger.getLogger(OneLineOneMeaning.class.getName());
+    private final Logger logger;
+    private final LibraryService libraryService;
+
+    @Inject
+    public OneLineOneMeaning(LibraryService libraryService, Logger logger) {
+        this.libraryService = libraryService;
+        this.logger = logger;
+    }
 
     @Override
     public void good() {
-            List<Book> books = Initialize.initializeBooks();
-            LocalDate startParutionDate =  LocalDate.of(1991,06,12);
+            List<Book> books = libraryService.getAllBooks();
+            LocalDate startParutionDate =  LocalDate.of(1991,6,12);
 
             {
                 Map<String, Book> booksPerAuthorName = books.stream()
@@ -44,20 +52,20 @@ public class OneLineOneMeaning implements BestPracticeExample {
                                 book -> book.getAuthor().getName(),
                                 identity()));
 
-                LOGGER.info(() -> booksPerAuthorName.toString());
+                logger.info(() -> booksPerAuthorName.toString());
             }
     }
 
     @Override
     public void bad() {
-        List<Book> books = Initialize.initializeBooks();
-        LocalDate startParutionDate =  LocalDate.of(1991,06,12);
+        List<Book> books = libraryService.getAllBooks();
+        LocalDate startParutionDate =  LocalDate.of(1991,6,12);
 
         {
             Map<String, Book> booksPerAuthorName = books.stream().filter(book -> !book.getAuthor().isDead()).filter(book -> book.getParutionDate()
                     .isAfter(startParutionDate)).collect(toMap(book -> book.getAuthor().getName(), book -> book));
 
-            LOGGER.info(() -> booksPerAuthorName.toString());
+            logger.info(() -> booksPerAuthorName.toString());
         }
     }
 }
