@@ -18,17 +18,16 @@ public class BracesAreEvils implements BestPracticeExample {
 
     private final Logger logger;
 
-    private LibraryService libraryService;
+    private List<Book> books;
 
     @Inject
     public BracesAreEvils(LibraryService libraryService, Logger logger) {
-        this.libraryService = libraryService;
         this.logger = logger;
+        books = libraryService.getAllBooks();
     }
 
     @Override
     public void good() {
-        List<Book> books = libraryService.getAllBooks();
 
         if (logger.isLoggable(Level.INFO)) {
             books.stream()
@@ -54,8 +53,6 @@ public class BracesAreEvils implements BestPracticeExample {
 
     @Override
     public void bad() {
-        List<Book> books = libraryService.getAllBooks();
-
         StringBuilder text = new StringBuilder();
         books.stream()
                 .forEach(book -> {
@@ -77,8 +74,6 @@ public class BracesAreEvils implements BestPracticeExample {
     }
 
     public void old() {
-        List<Book> books = libraryService.getAllBooks();
-
         if (logger.isLoggable(Level.INFO)) {
             for (Book book : books) {
                 if (book.getParutionDate().getYear() > 1991) {

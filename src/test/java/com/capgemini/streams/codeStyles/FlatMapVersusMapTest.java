@@ -18,7 +18,7 @@ public class FlatMapVersusMapTest extends AbstractTest<FlatMapVersusMap> {
     }
 
     @Override
-    public void verifyGood(List<String> logs) {
+    protected void verifyGood(List<String> logs) {
         assertThat(logs, not(empty()));
     }
 

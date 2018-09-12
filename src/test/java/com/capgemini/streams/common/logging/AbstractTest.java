@@ -48,7 +48,7 @@ public abstract class AbstractTest<TargetClass extends BestPracticeExample> {
         verifyGood(logs);
     }
 
-    public abstract void verifyGood(List<String> logs);
+    protected abstract void verifyGood(List<String> logs);
 
     @Test
     public void bad() {
