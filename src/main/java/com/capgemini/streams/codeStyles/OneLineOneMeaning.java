@@ -13,7 +13,7 @@
 ////////////////////////////////////////////////////////////////////
 package com.capgemini.streams.codeStyles;
 
-import com.capgemini.streams.common.BestPracticeExample;
+import com.capgemini.streams.common.AbstractExample;
 import com.capgemini.streams.domain.Book;
 import com.capgemini.streams.service.LibraryService;
 import com.google.inject.Inject;
@@ -29,14 +29,11 @@ import static java.util.stream.Collectors.toMap;
 /**
  * @author FJM575 (Raphael Themans)
  */
-public class OneLineOneMeaning implements BestPracticeExample {
-    private final Logger logger;
-    private final LibraryService libraryService;
+public class OneLineOneMeaning extends AbstractExample {
 
     @Inject
     public OneLineOneMeaning(LibraryService libraryService, Logger logger) {
-        this.libraryService = libraryService;
-        this.logger = logger;
+        super(libraryService, logger);
     }
 
     @Override

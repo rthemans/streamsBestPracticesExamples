@@ -1,26 +1,23 @@
 package com.capgemini.streams.codeStyles;
 
-import com.capgemini.streams.common.BestPracticeExample;
+import com.capgemini.streams.common.AbstractExample;
 import com.capgemini.streams.domain.Book;
 import com.capgemini.streams.service.LibraryService;
 import com.google.inject.Inject;
 
 import java.util.List;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-public class MethodReference implements BestPracticeExample {
-
-    private final Logger logger;
+public class MethodReference extends AbstractExample {
 
     private List<Book> books;
 
     @Inject
     public MethodReference(LibraryService libraryService, Logger logger) {
+        super(libraryService, logger);
         books = libraryService.getAllBooks();
-        this.logger = logger;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.capgemini.streams.codeStyles;
 
-import com.capgemini.streams.common.BestPracticeExample;
+import com.capgemini.streams.common.AbstractExample;
 import com.capgemini.streams.domain.Book;
 import com.capgemini.streams.service.LibraryService;
 import com.google.inject.Inject;
@@ -14,15 +14,13 @@ import static com.capgemini.streams.common.StringUtils.NL;
 /**
  * @author Raphael Themans
  */
-public class BracesAreEvils implements BestPracticeExample {
-
-    private final Logger logger;
+public class BracesAreEvils extends AbstractExample {
 
     private List<Book> books;
 
     @Inject
     public BracesAreEvils(LibraryService libraryService, Logger logger) {
-        this.logger = logger;
+        super(libraryService, logger);
         books = libraryService.getAllBooks();
     }
 

@@ -1,5 +1,6 @@
 package com.capgemini.streams.codeStyles;
 
+import com.capgemini.streams.common.AbstractExample;
 import com.capgemini.streams.common.BestPracticeExample;
 import com.capgemini.streams.domain.Book;
 import com.capgemini.streams.domain.Chapter;
@@ -12,14 +13,12 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
-public class FlatMapVersusMap implements BestPracticeExample {
-    private final Logger logger;
-
+public class FlatMapVersusMap extends AbstractExample {
     private final List<Book> books;
 
     @Inject
     public FlatMapVersusMap(LibraryService libraryService, Logger logger) {
-        this.logger = logger;
+        super(libraryService, logger);
         this.books = libraryService.getAllBooks();
     }
 
